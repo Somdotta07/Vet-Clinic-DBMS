@@ -69,3 +69,57 @@ SELECT * FROM animals WHERE weight_kg >= 10.4 AND weight_kg <= 17.3;
   4 | Devimon | 2017-05-12    |               5 | t        |      11.0
 (2 rows)
 */
+
+                                  -----DAY 2-----
+---Write queries to answer the following questions:
+--How many animals are there?
+ SELECT COUNT(*) FROM animals;
+ /*count
+-------
+     9
+*/
+--How many animals have never tried to escape?
+SELECT COUNT(*) FROM animals WHERE escape_attempts=0;
+/*
+ count
+-------
+     2
+*/
+--What is the average weight of animals?
+SELECT ROUND(AVG(weight_kg)) FROM animals;
+/*
+round
+-------
+    17 
+*/
+--Who escapes the most, neutered or not neutered animals?
+SELECT name, escape_attempts FROM animals WHERE escape_attempts =(SELECT MAX(escape_attempts) FROM animals);
+/*
+name   | escape_attempts
+---------+-----------------
+ Boarmon |               7
+(1 row)
+*/
+--What is the minimum and maximum weight of each type of animal?
+--For 'mon'----
+SELECT MAX(weight_kg), MIN(weight_kg) FROM animals WHERE species LIKE '%mon%';
+ /*max  | min
+------+-----
+ 45.0 | 8.0
+(1 row)*/
+--For All species --
+SELECT species, MIN(weight_kg), MAX(weight_kg) FROM animals GROUP BY species;
+/*  species | min  | max
+---------+------+------
+ pokemon | 11.0 | 17.0
+ digimon |  8.0 | 45.0
+ */
+--What is the average number of escape attempts per animal type of those born --between 1990 and 2000?
+SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1990-1-1' AND '2000-1-1' GROUP BY species;
+/*
+ species |        avg
+---------+--------------------
+ pokemon | 3.0000000000000000
+*/
+
+-------------------------------------------------------------------------------------------
