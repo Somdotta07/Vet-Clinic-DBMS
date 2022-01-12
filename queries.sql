@@ -1,5 +1,5 @@
 /*Queries that provide answers to the questions from all projects.*/
-
+                                            -----DAY 1-----
 --Find all animals whose name ends in "mon".
 SELECT * FROM animals WHERE name LIKE '%mon';
 /*
@@ -123,3 +123,76 @@ SELECT species, AVG(escape_attempts) FROM animals WHERE date_of_birth BETWEEN '1
 */
 
 -------------------------------------------------------------------------------------------
+
+                                              -----DAY 3-----
+
+--Write queries (using JOIN) to answer the following questions:
+--What animals belong to Melody Pond?
+SELECT animals.name FROM animals JOIN owners ON animals.owner_id=owners.id WHERE full_name='Melody Pond';
+ /* name
+------------
+ Blossom
+ Charmander
+ Squirtle
+(3 rows)*/
+--List of all animals that are pokemon (their type is Pokemon).
+SELECT animals.name FROM animals JOIN species ON animals.species_id=species.id WHERE species_id=1;
+/*
+    name
+------------
+ Pikachu
+ Blossom
+ Charmander
+ Squirtle
+(4 rows)
+*/
+--List all owners and their animals, remember to include those that don't own any animal.
+SELECT animals.name,full_name FROM owners LEFT JOIN animals ON animals.owner_id=owners.id;
+/*
+    name    |    full_name
+------------+-----------------
+ Agumon     | Sam Smith
+ Gabumon    | Jennifer Orwell
+ Pikachu    | Jennifer Orwell
+ Devimon    | Bob
+ Squirtle   | Melody Pond
+ Charmander | Melody Pond
+ Blossom    | Melody Pond
+ Angemon    | Dean Winchester
+ Boarmon    | Dean Winchester
+            | Jodie Whittaker
+*/
+--How many animals are there per species?
+SELECT species.name, COUNT(*) from animals JOIN species ON animals.species_id=species.id GROUP BY species.name;
+/*
+ name   | count
+---------+-------
+ Pokemon |     4
+ Digimon |     5
+(2 rows)
+*/
+--List all Digimon owned by Jennifer Orwell.
+SELECT animals.name FROM animals JOIN owners ON animals.owner_id=owners.id WHERE owners.full_name='Jennifer Orwell' AND species_id=2;
+/*
+  name
+---------
+ Gabumon
+(1 row)
+*/
+--List all animals owned by Dean Winchester that haven't tried to escape.
+SELECT animals.name FROM animals JOIN owners ON animals.owner_id=owners.id 
+WHERE owners.full_name='Dean Winchester' AND escape_attempts=0;
+/*
+ name
+------
+(0 rows)
+*/
+--Who owns the most animals?
+SELECT owners.full_name, COUNT(animals.name) AS total FROM owners LEFT JOIN animals ON animals.owner_id=owners.id 
+GROUP BY owners.full_name ORDER BY total DESC LIMIT 1;
+/*
+  full_name  | total
+-------------+-------
+ Melody Pond |     3
+(1 row)
+*/                                        
