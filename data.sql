@@ -14,6 +14,7 @@ INSERT INTO animals(NAME,DATE_OF_BIRTH,ESCAPE_ATTEMPTS,NEUTERED,WEIGHT_KG) VALUE
 
 
 /*Day 2 Entry*/
+
 --Animal: His name is Charmander. He was born on Feb 8th, 2020, and currently weighs -11kg. He is not neutered and he has never tried to escape.
 INSERT INTO animals(NAME,DATE_OF_BIRTH,ESCAPE_ATTEMPTS,NEUTERED,WEIGHT_KG) VALUES ('Charmander','2020-2-08',0,false,-11.0);
 --Animal: Her name is Plantmon. She was born on Nov 15th, 2022, and currently weighs -5.7kg. She is neutered and she has tried to escape 2 times.
@@ -26,3 +27,36 @@ INSERT INTO animals(NAME,DATE_OF_BIRTH,ESCAPE_ATTEMPTS,NEUTERED,WEIGHT_KG) VALUE
  INSERT INTO animals(NAME,DATE_OF_BIRTH,ESCAPE_ATTEMPTS,NEUTERED,WEIGHT_KG) VALUES ('Boarmon','2005-06-07',7,true,20.4);
  --Animal: Her name is Blossom. She was born on Oct 13th, 1998, and currently weighs 17kg. She is neutered and she has tried to escape 3 times.
 INSERT INTO animals(NAME,DATE_OF_BIRTH,ESCAPE_ATTEMPTS,NEUTERED,WEIGHT_KG) VALUES ('Blossom','1998-10-13',3,true,17.0);
+
+/*Day 3 Entry*/
+--Insert the following data into the owners table
+
+--Sam Smith 34 years old.
+--Jennifer Orwell 19 years old.
+--Bob 45 years old.
+--Melody Pond 77 years old.
+--Dean Winchester 14 years old.
+--Jodie Whittaker 38 years old.
+INSERT INTO owners(FULL_NAME,AGE) VALUES('Sam Smith', 34),('Jennifer Orwell', 19),('Bob', 45),('Melody Pond', 77),('Dean Winchester', 14),('Jodie Whittaker', 38);
+--Insert the following data into the species table:
+--Pokemon
+--Digimon
+INSERT INTO species (name) VALUES ('Pokemon'), ('Digimon');
+
+--Modify your inserted animals so it includes the species_id value:
+--If the name ends in "mon" it will be Digimon
+UPDATE animals SET species_id=2 WHERE name LIKE '%mon';
+--All other animals are Pokemon
+UPDATE animals SET species_id=1;
+
+--Modify your inserted animals to include owner information (owner_id):
+--Sam Smith owns Agumon.
+UPDATE animals SET owner_id=1 WHERE name='Agumon';
+--Jennifer Orwell owns Gabumon and Pikachu.
+UPDATE animals SET owner_id=2 WHERE name IN ('Gabumon','Pikachu');
+--Bob owns Devimon and Plantmon.
+UPDATE animals SET owner_id=3 WHERE name IN ('Devimon','Plantmon');
+--Melody Pond owns Charmander, Squirtle, and Blossom.
+UPDATE animals SET owner_id=4 WHERE name IN ('Charmander','Squirtle','Blossom');
+--Dean Winchester owns Angemon and Boarmon.
+UPDATE animals SET owner_id=5 WHERE name IN ('Angemon','Boarmon');
