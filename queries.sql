@@ -205,8 +205,19 @@ GROUP BY owners.full_name ORDER BY total DESC LIMIT 1;
 --Who was the last animal seen by William Tatcher?
 SELECT vets.name, animals.name, date_of_visit FROM vets JOIN visits ON vets.id=visits.vets_id
 JOIN animals ON animals.id= visits.animals_id WHERE vets.name ='William Tatcher' ORDER BY visits.date_of_visit DESC LIMIT 1;
+/*
+     name       |  name   | date_of_visit
+-----------------+---------+---------------
+ William Tatcher | Blossom | 2021-01-11
+(1 row)
+*/
 --How many different animals did Stephanie Mendez see?
 SELECT COUNT(*) as total_animals from vets JOIN visits ON vets.id = visits.vets_id WHERE name='Stephanie Mendez';
+/*
+total_animals
+---------------
+             3
+(1 row)*/
 --List all vets and their specialties, including vets with no specialties.
 SELECT 
 	vets.name,
@@ -214,17 +225,48 @@ SELECT
 from vets
 LEFT JOIN specializations ON specializations.vets_id = vets.id
 LEFT JOIN  species ON specializations.species_id = species.id;
+/*
+       name       | specialization
+------------------+----------------
+ William Tatcher  | Pokemon
+ Stephanie Mendez | Digimon
+ Stephanie Mendez | Pokemon
+ Jack Harkness    | Digimon
+ Maisy Smith      |
+(5 rows)
+*/
 --List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
-SELECT animals.name ,date_of_visit from animals JOIN visits ON animals.id= visits.animals_id JOIN vets ON vets.id=visits.vets_id WHERE vets.name= 'Stephanie Mendez' AND visits.date_of_visit BETWEEN '2020-04-01' AND '2020-08-30';
+SELECT animals.name ,date_of_visit from animals 
+JOIN visits ON animals.id= visits.animals_id JOIN vets ON vets.id=visits.vets_id
+ WHERE vets.name= 'Stephanie Mendez' AND visits.date_of_visit BETWEEN '2020-04-01' AND '2020-08-30';
+ /*
+   name   | date_of_visit
+---------+---------------
+ Agumon  | 2020-07-22
+ Blossom | 2020-05-24
+(2 rows)
+*/
 --What animal has the most visits to vets?
 SELECT animals.name, COUNT(*) as total_visit from animals
 JOIN visits ON visits.animals_id = animals.id
 GROUP BY animals.name
 ORDER BY total_visit DESC
 LIMIT 1;
+/*
+  name   | total_visit
+---------+-------------
+ Boarmon |           4
+(1 row)
+*/
 --Who was Maisy Smith's first visit?
 SELECT vets.name, animals.name, date_of_visit FROM vets JOIN visits ON vets.id=visits.vets_id
 JOIN animals ON animals.id= visits.animals_id WHERE vets.name ='Maisy Smith' ORDER BY visits.date_of_visit ASC LIMIT 1;
+/*
+   name     |  name   | date_of_visit
+-------------+---------+---------------
+ Maisy Smith | Boarmon | 2019-01-24
+(1 row)
+*/
 --Details for most recent visit: animal information, vet information, and date of visit.
 SELECT
 	date_of_visit,
@@ -238,8 +280,14 @@ SELECT
 from visits
 JOIN animals ON animals.id = visits.animals_id
 JOIN vets ON vets.id = visits.vets_id
-ORDER BY date_of_visit
+ORDER BY date_of_visit DESC
 LIMIT 1;
+/*
+date_of_visit | animal_dob | escape_attempts | neutered | animal_weight |  vet_name   | vet_age | date_of_graduation
+---------------+------------+-----------------+----------+---------------+-------------+---------+--------------------
+ 2021-05-04    | 2017-05-12 |               5 | t        |          11.0 | Maisy Smith |      26 | 2019-01-17
+(1 row)
+*/
 --How many visits were with a vet that did not specialize in that animal's species?
 SELECT COUNT(*)
 FROM visits
@@ -247,10 +295,25 @@ JOIN animals ON animals.id = visits.animals_id
 JOIN vets ON vets.id = visits.vets_id
 JOIN specializations ON specializations.vets_id = visits.vets_id
 WHERE animals.species_id != specializations.species_id;
+/*
+ count
+-------
+     6
+(1 row)
+
+*/
 --What specialty should Maisy Smith consider getting? Look for the species she gets the most.
 SELECT species.name as specialization , COUNT(visits.animals_id) from visits
 JOIN vets ON vets.id = visits.vets_id
 JOIN animals ON animals.id = visits.animals_id
 JOIN species ON species.id = animals.species_id
 WHERE vets.name = 'Maisy Smith'
-GROUP BY species.name;                                         
+GROUP BY species.name;
+/*
+ specialization | count
+----------------+-------
+ Digimon        |     7
+ Pokemon        |     3
+(2 rows)
+*/          
+--------------------------------------------------------------------------------------                               
