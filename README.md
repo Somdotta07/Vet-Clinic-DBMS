@@ -15,13 +15,18 @@ This repository includes files with plain SQL that can be used to recreate a dat
 
 ## Authors
 
-👤 Somdotta Sarkar
+👤 **Somdotta Sarkar**
 
 - [Github](https://github.com/Somdotta07)
 - [Twitter](https://github.com/Somdotta07)
 - [LinkedIn](www.linkedin.com/in/somdottasarkar)
 
 
+👤 **Shahier Nashaat**
+
+- GitHub: [@githubhandle](https://github.com/ShahierNashaat)
+- Twitter: [@twitterhandle](https://twitter.com/ShahierN)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/shahier-nashaat-73519313a/)
 
 ## 🤝 Contributing
 
