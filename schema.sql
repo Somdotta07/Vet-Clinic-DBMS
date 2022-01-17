@@ -73,3 +73,7 @@ CREATE TABLE visits (
 ------------------------ WEEK 2 DAY 1----------------------------------
 -- Add an email column to your owners table
 ALTER TABLE owners ADD COLUMN email VARCHAR(120);
+
+CREATE INDEX visits_animals_id_idx ON visits(animals_id);
+CREATE INDEX visits_vets_id_idx ON visits(vets_id);
+CREATE INDEX visits_owners_id_idx ON owners(email);
