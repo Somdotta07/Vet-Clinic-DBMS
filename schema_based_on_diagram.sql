@@ -11,3 +11,16 @@ CREATE TABLE medical_histories (
    status VARCHAR(220),
    CONSTRAINT fk_patient FOREIGN KEY(patient_id) REFERENCES patients(id)  
 );
+
+CREATE TABLE treaments (
+    id SERIAL PRIMARY KEY,
+    type VARCHAR(220),
+    name VARCHAR(220),
+);
+
+CREATE TABLE medical_histories_treaments (
+    medical_history_id int,
+    treament_id int,
+    CONSTRAINT fk_medical_history FOREIGN KEY(medical_history_id) REFERENCES medical_histories(id),
+    CONSTRAINT fk_treament FOREIGN KEY(treament_id) REFERENCES treaments(id)
+);
