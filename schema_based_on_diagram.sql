@@ -42,7 +42,7 @@ CREATE TABLE invoice_items (
     invoice_id INT,
     treament_id INT,
     CONSTRAINT fk_invoices FOREIGN KEY(invoice_id) REFERENCES invoices(id),
-    CONSTRAINT fk_treament FOREIGN KEY(treament_id) REFERENCES treaments(id)
+    CONSTRAINT fk_treatment FOREIGN KEY(treament_id) REFERENCES treaments(id)
 );
 
 /* --------FK INDEXES----*/
@@ -50,5 +50,9 @@ CREATE TABLE invoice_items (
 CREATE INDEX medical_histories_patient_id_index ON medical_histories(patient_id);
 
 CREATE INDEX medical_histories_treaments_medical_history_id_index ON medical_histories_treaments(medical_history_id);
-CREATE INDEX medical_histories_treaments_treament_id_index ON medical_histories_treaments(treament_id);
+CREATE INDEX medical_histories_treaments_treament_id_index ON medical_histories_treaments(treament_id); 
+CREATE INDEX invoice_items_index ON invoice_items(invoice_id);
+CREATE INDEX invoices_medical_history_id_index ON invoices (medical_history_id);
+CREATE INDEX invoice_items_treatments_id_index ON invoice_items(treament_id);
+
 
