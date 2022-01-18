@@ -48,3 +48,7 @@ CREATE TABLE invoice_items (
 /* --------FK INDEXES----*/
 
 CREATE INDEX medical_histories_patient_id_index ON medical_histories(patient_id);
+
+CREATE INDEX medical_histories_treaments_medical_history_id_index ON medical_histories_treaments(medical_history_id);
+CREATE INDEX medical_histories_treaments_treament_id_index ON medical_histories_treaments(treament_id);
+
