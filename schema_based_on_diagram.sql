@@ -44,3 +44,7 @@ CREATE TABLE invoice_items (
     CONSTRAINT fk_invoices FOREIGN KEY(invoice_id) REFERENCES invoices(id),
     CONSTRAINT fk_treament FOREIGN KEY(treament_id) REFERENCES treaments(id)
 );
+
+/* --------FK INDEXES----*/
+
+CREATE INDEX medical_histories_patient_id_index ON medical_histories(patient_id);
