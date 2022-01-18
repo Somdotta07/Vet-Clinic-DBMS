@@ -2,7 +2,8 @@
 
 > In this project I've created a database use a relational database to create the initial data structure for a vet clinic. You will create a table to store animals' information, insert some data into it, and query it.
 
-
+# Schema Diagram
+![VET CLINIC](https://user-images.githubusercontent.com/84907743/149941162-cc5d4f75-af7c-4ef3-bbb2-336ccfbebd91.png)
 
 ## Getting Started
 
